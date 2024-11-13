@@ -1,9 +1,21 @@
-export default function Country({ country }) {
+import { useState } from "react";
+import "./Country.css"
+
+export default function Country({ country,visitedCountry }) {
     const { name, languages, area,flags } = country;
-    console.log(country); // Log languages to see the structure
+    // console.log(country); // Log languages to see the structure
+    let [isGoing,setIsGoing]=useState(false)
+    // visited funtion to check 
+    function btnVisited(){
+      setIsGoing(!isGoing)
+
+    }
+    
+    // console.log(visitedCountry);
+   
   
     return (
-      <div style={{border:'1px solid grey',
+      <div className={isGoing ? 'visited':undefined} style={{border:'1px solid grey',
         margin:'10px',
         padding:'10px',
         borderRadius:'10px',
@@ -27,7 +39,14 @@ export default function Country({ country }) {
               <li key={index}>{language}</li> 
             ))}
         </ul>
+
        </div>
+       {/* adding btn here */}
+       <button onClick={()=>visitedCountry(country)} >Mark visited</button>
+       <br />
+
+       <button onClick={btnVisited}>{isGoing ?'Visited':'Going'}</button>
+
       </div>
     );
   }
